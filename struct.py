@@ -47,7 +47,7 @@ class TicTacToe:
         display_array = [cell if cell is not None else '-' for cell in self.game_array]
         
         # Print the grid in 3x3 format
-        print(f"  |        |  ")
+        print(f" {display_array[0]} | {display_array[1]} | {display_array[2]} ")
         print("-----------")
         print(f" {display_array[3]} | {display_array[4]} | {display_array[5]} ")
         print("-----------")
