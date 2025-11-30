@@ -37,14 +37,7 @@ class TicTacToe:
     # Player input and check valid
     def game_process(self):
         # TEMPORARY: Just to stop the infinite loop 
-        input(f"Simulating Player {self.current_player}'s turn... Press Enter to continue.")
-        
-        # Simulating a turn switch 
-        if self.current_player == "X":
-            self.current_player = "O"
-        else:
-            self.current_player = "X"
-
+       pass
 
 
 
