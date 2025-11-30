@@ -9,7 +9,7 @@ class TicTacToe:
                            N, N, N,
                            N, N, N]
 
-    # Print Welcome and Instruction grid (Khánh)
+    # Print Welcome and Instruction grid
     def welcome(self):
         print("\n=== NEO TIC-TAC-TOE ===")
         print("To play, enter the number of the cell (0-8):")
@@ -19,30 +19,13 @@ class TicTacToe:
         print("-----------")
         print(" 6 | 7 | 8 ")
         print("\nLet's start! Player X goes first.\n")
-<<<<<<< HEAD
-
-        
-
-
-
-=======
->>>>>>> feat/board
 
     def check_winner(self):
         pass
 
-
-
-
-
-
-
     # Player input and check valid
     def game_process(self):
         # TEMPORARY: Just to stop the infinite loop 
-<<<<<<< HEAD
-       pass
-=======
         input(f"Simulating Player {self.current_player}'s turn... Press Enter to continue.")
         
         # Simulating a turn switch 
@@ -50,29 +33,16 @@ class TicTacToe:
             self.current_player = "O"
         else:
             self.current_player = "X"
->>>>>>> feat/board
 
-
-
-
-
-
-
-    # Print caption: Player's turn or WINNER or DRAW (Khánh)
+    # Print caption: Player's turn or WINNER or DRAW
     def print_caption(self):
         if self.winner:
             print(f"\n!!! {self.winner} WINS !!!")
         else:
             print(f"\nPlayer {self.current_player}'s turn.")
-<<<<<<< HEAD
-
-
-    def print_grid(self): #(Khánh)
-=======
 
 
     def print_grid(self):
->>>>>>> feat/board
         # Convert None values to '-' for display
         display_array = [cell if cell is not None else '-' for cell in self.game_array]
         
