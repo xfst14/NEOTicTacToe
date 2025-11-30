@@ -19,11 +19,14 @@ class TicTacToe:
         print("-----------")
         print(" 6 | 7 | 8 ")
         print("\nLet's start! Player X goes first.\n")
+<<<<<<< HEAD
 
         
 
 
 
+=======
+>>>>>>> feat/board
 
     def check_winner(self):
         pass
@@ -37,7 +40,17 @@ class TicTacToe:
     # Player input and check valid
     def game_process(self):
         # TEMPORARY: Just to stop the infinite loop 
+<<<<<<< HEAD
        pass
+=======
+        input(f"Simulating Player {self.current_player}'s turn... Press Enter to continue.")
+        
+        # Simulating a turn switch 
+        if self.current_player == "X":
+            self.current_player = "O"
+        else:
+            self.current_player = "X"
+>>>>>>> feat/board
 
 
 
@@ -51,9 +64,15 @@ class TicTacToe:
             print(f"\n!!! {self.winner} WINS !!!")
         else:
             print(f"\nPlayer {self.current_player}'s turn.")
+<<<<<<< HEAD
 
 
     def print_grid(self): #(Khánh)
+=======
+
+
+    def print_grid(self):
+>>>>>>> feat/board
         # Convert None values to '-' for display
         display_array = [cell if cell is not None else '-' for cell in self.game_array]
         
