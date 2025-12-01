@@ -32,15 +32,7 @@ class TicTacToe:
 
 
 
-    # UPDATE GRID: Updates the array and switches turns
-    def update_grid(self, position):
-        # 1. Update the array with the current player's symbol (X or O)
-        self.game_array[position] = self.current_player
-        # 2. Switch the turn automatically
-        if self.current_player == "X":
-            self.current_player = "O"
-        else:
-            self.current_player = "X"
+
 
    
 
@@ -50,15 +42,15 @@ class TicTacToe:
                 self.inp = int(input(f"Player {self.current_player} choose a cell (1 - 9): "))
                 index = self.inp - 1
                 # Check valid input range
-                if self.int < 1 and self.inp > 9:
+                if self.inp < 1 and self.inp > 9:
                     print("Invalid input. Please enter a number between 1 and 9")
                     continue
                 # Check occupied position
                 if self.game_array[index] is not None:
                     print("Position already taken. Try again!")
                     continue
-                self.game_array[index] = self.player
-                self.player = "O" if self.player == "X" else "X"
+                self.game_array[index] = self.current_player
+                self.curren_player = "O" if self.current_player == "X" else "X"
             except ValueError:
                 print("Invalid input. Please enter a number")
                 continue
