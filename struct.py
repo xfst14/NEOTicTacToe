@@ -20,19 +20,52 @@ class TicTacToe:
         print(" 6 | 7 | 8 ")
         print("\nLet's start! Player X goes first.\n")
 
-    def check_winner(self):
-        pass
-
-    # Player input and check valid
-    def game_process(self):
-        # TEMPORARY: Just to stop the infinite loop 
-        input(f"Simulating Player {self.current_player}'s turn... Press Enter to continue.")
+    def print_grid(self):
+        display_array = [cell for cell in self.game_array]
         
-        # Simulating a turn switch 
+        # Print the grid in 3x3 format
+        print(f" {display_array[0]} | {display_array[1]} | {display_array[2]} ")
+        print("-----------")
+        print(f" {display_array[3]} | {display_array[4]} | {display_array[5]} ")
+        print("-----------")
+        print(f" {display_array[6]} | {display_array[7]} | {display_array[8]} ")
+
+# UPDATE GRID: Updates the array and switches turns
+    def update_grid(self, position):
+        # 1. Update the array with the current player's symbol (X or O)
+        self.game_array[position] = self.current_player
+
+        # 2. Switch the turn automatically
         if self.current_player == "X":
             self.current_player = "O"
         else:
             self.current_player = "X"
+
+    def game_process(self):
+       while True:
+            try:
+                self.inp = int(input(f"Player {self.player} choose a cell (1 - 9): "))
+                index = self.inp - 1
+                # Check valid input range
+                if self.int < 1 and self.inp > 9:
+                    print("Invalid input. Please enter a number between 1 and 9")
+                    continue
+                # Check occupied position
+                if self.game_array[index] is not None:
+                    print("Position already taken. Try again!")
+                    continue
+                self.game_array[index] = self.player
+                self.player = "O" if self.player == "X" else "X"
+            except ValueError:
+                print("Invalid input. Please enter a number")
+                continue
+            break
+
+    def check_winner(self):
+        pass
+
+    # Player input and check valid
+   
 
     # Print caption: Player's turn or WINNER or DRAW
     def print_caption(self):
@@ -42,17 +75,8 @@ class TicTacToe:
             print(f"\nPlayer {self.current_player}'s turn.")
 
 
-    def print_grid(self):
-        # Convert None values to '-' for display
-        display_array = [cell if cell is not None else '-' for cell in self.game_array]
-        
-        # Print the grid in 3x3 format
-        print(f" {display_array[0]} | {display_array[1]} | {display_array[2]} ")
-        print("-----------")
-        print(f" {display_array[3]} | {display_array[4]} | {display_array[5]} ")
-        print("-----------")
-        print(f" {display_array[6]} | {display_array[7]} | {display_array[8]} ")
 
+       
 
 
 class Game:
