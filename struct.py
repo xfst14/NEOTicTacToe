@@ -32,27 +32,27 @@ class TicTacToe:
 
 
 
-
-
-   
-
     def game_process(self):
         while True:
             try:
-                self.inp = int(input(f"Player {self.player} choose a cell (1 - 9): "))
+                self.inp = int(input(f"Player {self.current_player} choose a cell (1 - 9): "))
                 index = self.inp - 1
                 # Check valid input range
-                if self.int < 1 and self.inp > 9:
+                if self.inp < 1 or self.inp > 9:
                     print("Invalid input. Please enter a number between 1 and 9")
                     continue
                 # Check occupied position
                 if self.game_array[index] is not None:
                     print("Position already taken. Try again!")
                     continue
-                self.game_array[index] = self.player
-                self.player = "O" if self.player == "X" else "X"
+                self.game_array[index] = self.current_player
+                if self.current_player == "X":
+                    self.current_player = "O"
+                else: self.current_player = "X"
             except ValueError:
                 print("Invalid input. Please enter a number")
+                continue
+            break
 
     def check_winner(self):
       pass
