@@ -12,16 +12,16 @@ class TicTacToe:
     # Print Welcome and Instruction grid
     def welcome(self):
         print("\n=== NEO TIC-TAC-TOE ===")
-        print("To play, enter the number of the cell (0-8):")
-        print(" 0 | 1 | 2 ")
+        print("To play, enter the number of the cell (1-9):")
+        print(" 1 | 2 | 3 ")
         print("-----------")
-        print(" 3 | 4 | 5 ")
+        print(" 4 | 5 | 6 ")
         print("-----------")
-        print(" 6 | 7 | 8 ")
+        print(" 7 | 8 | 9 ")
         print("\nLet's start! Player X goes first.\n")
 
     def print_grid(self):
-        display_array = [cell for cell in self.game_array]
+        display_array = [cell if cell in ("X", "O") else '-' for cell in self.game_array]
         
         # Print the grid in 3x3 format
         print(f" {display_array[0]} | {display_array[1]} | {display_array[2]} ")
@@ -30,16 +30,19 @@ class TicTacToe:
         print("-----------")
         print(f" {display_array[6]} | {display_array[7]} | {display_array[8]} ")
 
-# UPDATE GRID: Updates the array and switches turns
+
+
+    # UPDATE GRID: Updates the array and switches turns
     def update_grid(self, position):
         # 1. Update the array with the current player's symbol (X or O)
         self.game_array[position] = self.current_player
-
         # 2. Switch the turn automatically
         if self.current_player == "X":
             self.current_player = "O"
         else:
             self.current_player = "X"
+
+   
 
     def game_process(self):
        while True:
@@ -62,9 +65,9 @@ class TicTacToe:
             break
 
     def check_winner(self):
-        pass
+      pass
 
-    # Player input and check valid
+   
    
 
     # Print caption: Player's turn or WINNER or DRAW
@@ -73,10 +76,7 @@ class TicTacToe:
             print(f"\n!!! {self.winner} WINS !!!")
         else:
             print(f"\nPlayer {self.current_player}'s turn.")
-
-
-
-       
+    
 
 
 class Game:
@@ -90,6 +90,7 @@ class Game:
             self.tic_tac_toe.print_caption()
 
             if self.tic_tac_toe.winner:
+
                 break
             
             # Check for draw (board full and no winner)
