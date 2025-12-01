@@ -50,7 +50,9 @@ class TicTacToe:
                     print("Position already taken. Try again!")
                     continue
                 self.game_array[index] = self.current_player
-                self.curren_player = "O" if self.current_player == "X" else "X"
+                if self.current_player == "X":
+                    self.current_player = "O"
+                else: self.current_player = "X"
             except ValueError:
                 print("Invalid input. Please enter a number")
                 continue
@@ -59,7 +61,6 @@ class TicTacToe:
     def check_winner(self):
       pass
 
-   
    
 
     # Print caption: Player's turn or WINNER or DRAW
