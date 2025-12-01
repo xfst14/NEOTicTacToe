@@ -47,7 +47,7 @@ class TicTacToe:
     def game_process(self):
        while True:
             try:
-                self.inp = int(input(f"Player {self.player} choose a cell (1 - 9): "))
+                self.inp = int(input(f"Player {self.current_player} choose a cell (1 - 9): "))
                 index = self.inp - 1
                 # Check valid input range
                 if self.int < 1 and self.inp > 9:
