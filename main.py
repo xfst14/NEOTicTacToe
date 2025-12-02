@@ -55,8 +55,22 @@ class TicTacToe:
             break
 
     def check_winner(self):
-      pass
-
+        win_positions = [
+            [0,1,2],
+            [3,4,5],
+            [6,7,8],
+            [0,3,6],
+            [1,4,7],
+            [2,5,8],
+            [0,4,8],
+            [2,4,6]
+        ]
+        for position in win_positions:
+            a, b, c = position
+            if (self.game_array[a] == self.game_array[b] == self.game_array[c] 
+                and self.game_array[a] is not None):
+                self.winner = self.game_array[a]
+                return
    
 
     # Print caption: Player's turn or WINNER or DRAW
