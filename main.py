@@ -55,16 +55,18 @@ class TicTacToe:
             break
 
     def check_winner(self):
+        # Win combination
         win_positions = [
-            [0,1,2],
+            [0,1,2], # Row
             [3,4,5],
             [6,7,8],
-            [0,3,6],
+            [0,3,6], # Column
             [1,4,7],
             [2,5,8],
-            [0,4,8],
+            [0,4,8], # Diagonal
             [2,4,6]
         ]
+        # Checking condition
         for position in win_positions:
             a, b, c = position
             if (self.game_array[a] == self.game_array[b] == self.game_array[c] 
@@ -80,7 +82,14 @@ class TicTacToe:
         else:
             print(f"\nPlayer {self.current_player}'s turn.")
     
-
+    # Re-define property for new game
+    def reset(self):
+        self.winner = None
+        self.current_player = "X"
+        self.game_array = [N, N, N,
+                           N, N, N,
+                           N, N, N]
+        print("\nGame has been reset! Player X goes first.\n")
 
 class Game:
     def __init__(self):
@@ -89,21 +98,29 @@ class Game:
     def run(self):
         self.tic_tac_toe.welcome()
         while True:
-            self.tic_tac_toe.print_grid()
-            self.tic_tac_toe.print_caption()
+            while True:
+                self.tic_tac_toe.print_grid()
+                self.tic_tac_toe.print_caption()
 
-            if self.tic_tac_toe.winner:
+                if self.tic_tac_toe.winner:
 
-                break
+                    break
             
-            # Check for draw (board full and no winner)
-            if N not in self.tic_tac_toe.game_array and not self.tic_tac_toe.winner:
-                print("\nIt's a DRAW!")
+                # Check for draw (board full and no winner)
+                if N not in self.tic_tac_toe.game_array and not self.tic_tac_toe.winner:
+                    print("\nIt's a DRAW!")
+                    break
+
+                self.tic_tac_toe.game_process()
+                self.tic_tac_toe.check_winner()
+
+            # Ask whether if players want to play agian
+            play_again = input("\nDo you want to play again? (y/n): ").strip().lower()
+            if play_again == 'y':
+                self.tic_tac_toe.reset()
+            else:
+                print("\nThanks for playing NEO TIC-TAC-TOE!")
                 break
-
-            self.tic_tac_toe.game_process()
-            self.tic_tac_toe.check_winner()
-
 
 if __name__ == '__main__':
     game = Game()
