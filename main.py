@@ -1,6 +1,6 @@
 # Import the 'os' module - this gives access to operating system functions
 import os
-
+import random
 N = None
 
 class TicTacToe:
@@ -103,9 +103,27 @@ class TicTacToe:
                            N, N, N,
                            N, N, N]
         print("\nGame has been reset! Player X goes first.\n")
-
+        
+class TicTacToe2(TicTacToe): # Mode 2 (Player vs BotEZ) using random
+    def __init__(self, game):
+        super().__init__(game)
+        self.human_player = "X"
+        self.bot_player = "O"
+        
+    def game_process(self):
+        if self.current_player == self.human_player:
+            # Use the regular human input flow from the base class
+            super().game_process()
+        else:
+            # Bot plays
+            available = [i for i in range(9)
+                         if self.game_array[i] is None]
+            index = random.choice(available)
+            print(f"Bot plays at position {index + 1}")
+            self.game_array[index] = self.bot_player
+            self.current_player = self.human_player
+        
 class Game:
-    
     def __init__(self):
         while True:
             game_mode = int(input("\nGame mode: HumanVsHuman(1); HumanVsBotEZ(2); HumanVsBotHard(3). Choose game mode: "))
