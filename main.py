@@ -105,8 +105,25 @@ class TicTacToe:
         print("\nGame has been reset! Player X goes first.\n")
 
 class Game:
+    
     def __init__(self):
-        self.tic_tac_toe = TicTacToe(self)
+        while True:
+            game_mode = int(input("\nGame mode: HumanVsHuman(1); HumanVsBotEZ(2); HumanVsBotHard(3). Choose game mode: "))
+            try:
+                if 1 <= game_mode <= 3:
+                    break
+                else:
+                    print("Invalid input. Please enter a number between 1 and 3 to choose a game mode.")
+            except ValueError:
+                print("Invalid input. Please enter a number between 1 and 3 to choose a game mode.")
+
+        if game_mode == 1:
+            self.game_mode = 1
+            self.tic_tac_toe = TicTacToe(self)
+        elif game_mode == 2:
+            self.game_mode = 2
+            self.tic_tac_toe = TicTacToe2(self)
+        # add game_mode 3 later
 
     def run(self):
         self.tic_tac_toe.clear_screen()  # Clear screen at start
