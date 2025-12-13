@@ -92,7 +92,7 @@ class TicTacToe:
         if self.winner:
             print(f"\n!!! {self.winner} WINS !!!")
         else:
-            print(f"\n {self.current_player}'s turn.")
+            print(f"\n{self.current_player}'s turn.")
     
 
     # Re-define property for new game
