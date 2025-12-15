@@ -123,6 +123,51 @@ class TicTacToe2(TicTacToe): # Mode 2 (Player vs BotEZ) using random
             self.game_array[index] = self.bot_player
             self.current_player = self.human_player
         
+class TicTacToe3(TicTacToe):
+    def __init__(self, game):
+        super().__init__(game)
+        self.human_player = "X"
+        self.bot_player = "O"
+
+    def minimax(self, mini_grid, depth, is_max):
+        self.check_winner()
+        if self.winner == "O":
+            return 1000
+        elif self.winner == "X":
+            return -1000
+        elif N not in mini_grid and not self.winner:
+            return 0
+
+        if is_max:
+            best_score = -1000
+            for i in range(9):
+                if mini_grid[i] == N:
+                    mini_grid[i] = 2
+                    score = self.minimax(mini_grid, depth + 1, False)
+                    mini_grid[i] = N
+                    best_score = max(score, best_score)
+        else:
+            best_score = 1000
+            score = self.minimax(mini_grid, depth + 1, True)
+
+    
+    # Get Bot input
+    def get_best_move():
+        pass
+
+    def game_process(self):
+        if self.current_player == self.human_player:
+            # Use the regular human input flow from the base class
+            super().game_process()
+        else:
+            # Bot plays
+            available = [i for i in range(9)
+                         if self.game_array[i] is None]
+            index = self.get_best_move()
+            print(f"Bot plays at position {index + 1}")
+            self.game_array[index] = self.bot_player
+            self.current_player = self.human_player
+
 class Game:
     def __init__(self):
         while True:
@@ -141,7 +186,9 @@ class Game:
         elif game_mode == 2:
             self.game_mode = 2
             self.tic_tac_toe = TicTacToe2(self)
-        # add game_mode 3 later
+        elif game_mode == 3:
+            self.game_mode = 3
+            self.tic_tac_toe = TicTacToe3(self)
 
     def run(self):
         self.tic_tac_toe.clear_screen()  # Clear screen at start
