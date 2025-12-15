@@ -132,9 +132,9 @@ class TicTacToe3(TicTacToe):
     def minimax(self, mini_grid, depth, is_max):
         self.check_winner()
         if self.winner == "O":
-            return 1000
+            return 1000 - depth
         elif self.winner == "X":
-            return -1000
+            return -1000 + depth
         elif N not in mini_grid and not self.winner:
             return 0
 
