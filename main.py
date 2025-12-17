@@ -66,7 +66,11 @@ class TicTacToe:
                 continue
             break
 
-    def check_winner(self):
+    def check_winner(self, board=None):
+        # If no board provided, use the actual game board and update self.winner
+        # If board is provided, just check and return the winner without modifying state
+        check_board = board if board is not None else self.game_array
+        
         # Win combination
         win_positions = [
             [0,1,2], # Row
@@ -81,10 +85,14 @@ class TicTacToe:
         # Checking condition
         for position in win_positions:
             a, b, c = position
-            if (self.game_array[a] == self.game_array[b] == self.game_array[c] 
-                and self.game_array[a] is not None):
-                self.winner = self.game_array[a]
-                return
+            if (check_board[a] == check_board[b] == check_board[c] 
+                and check_board[a] is not None):
+                winner = check_board[a]
+                # Only modify self.winner if we're checking the actual game board
+                if board is None:
+                    self.winner = winner
+                return winner
+        return None
    
 
     # Print caption: Player's turn or WINNER or DRAW
@@ -130,12 +138,16 @@ class TicTacToe3(TicTacToe):
         self.bot_player = "O"
 
     def minimax(self, mini_grid, depth, is_max):
-        self.check_winner()
-        if self.winner == "O":
+        # Check for winner on the current board state (pass mini_grid to avoid modifying game state)
+        winner = self.check_winner(mini_grid)
+        # If bot (O) wins, return positive score (adjusted by depth for faster wins)
+        if winner == "O":
             return 1000 - depth
-        elif self.winner == "X":
+        # If human (X) wins, return negative score (adjusted by depth)
+        elif winner == "X":
             return -1000 + depth
-        elif N not in mini_grid and not self.winner:
+        # If board is full and no winner, it's a draw
+        elif N not in mini_grid:
             return 0
 
         if is_max:
