@@ -154,18 +154,20 @@ class TicTacToe3(TicTacToe):
             best_score = -1000
             for i in range(9):
                 if mini_grid[i] == N:
-                    mini_grid[i] = 2
+                    mini_grid[i] = self.bot_player
                     score = self.minimax(mini_grid, depth + 1, False)
                     mini_grid[i] = N
                     best_score = max(score, best_score)
+            return best_score
         else:
             best_score = 1000
             for i in range(9):
                 if mini_grid[i] == N:
-                    mini_grid[i] = 1
+                    mini_grid[i] = self.human_player
                     score = self.minimax(mini_grid, depth + 1, True)
                     mini_grid[i] = N
                     best_score = min(score, best_score)
+            return best_score
     
     # Get Bot input
     def get_best_move():
