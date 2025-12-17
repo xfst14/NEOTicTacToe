@@ -160,8 +160,12 @@ class TicTacToe3(TicTacToe):
                     best_score = max(score, best_score)
         else:
             best_score = 1000
-            score = self.minimax(mini_grid, depth + 1, True)
-
+            for i in range(9):
+                if mini_grid[i] == N:
+                    mini_grid[i] = 1
+                    score = self.minimax(mini_grid, depth + 1, True)
+                    mini_grid[i] = N
+                    best_score = min(score, best_score)
     
     # Get Bot input
     def get_best_move():
@@ -183,14 +187,19 @@ class TicTacToe3(TicTacToe):
 class Game:
     def __init__(self):
         while True:
-            game_mode = int(input("\nGame mode: HumanVsHuman(1); HumanVsBotEZ(2); HumanVsBotHard(3). Choose game mode: "))
+            print("Game modes:")
+            print("1. Human vs Human ")
+            print("2. Human vs Bot (Easy) ")
+            print("3. Human vs Bot (Hard).")
+            
             try:
+                game_mode = int(input("Choose game mode: "))
                 if 1 <= game_mode <= 3:
                     break
                 else:
-                    print("Invalid input. Please enter a number between 1 and 3 to choose a game mode.")
+                    print("\nInvalid input. Please enter a number between 1 and 3.")
             except ValueError:
-                print("Invalid input. Please enter a number between 1 and 3 to choose a game mode.")
+                print("\nInvalid input. Please enter a number between 1 and 3.")
 
         if game_mode == 1:
             self.game_mode = 1
