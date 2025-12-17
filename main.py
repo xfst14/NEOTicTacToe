@@ -192,8 +192,6 @@ class TicTacToe3(TicTacToe):
             super().game_process()
         else:
             # Bot plays
-            available = [i for i in range(9)
-                         if self.game_array[i] is None]
             index = self.get_best_move()
             print(f"Bot plays at position {index + 1}")
             self.game_array[index] = self.bot_player
