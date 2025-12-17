@@ -170,8 +170,21 @@ class TicTacToe3(TicTacToe):
             return best_score
     
     # Get Bot input
-    def get_best_move():
-        pass
+    def get_best_move(self):
+        best_score = -1000
+        best_move = None
+        
+        for i in range(9):
+            if self.game_array[i] == N:
+                # Create a copy of main board
+                mini_grid = self.game_array.copy()
+                # Bot simulate the move
+                mini_grid[i] = self.bot_player
+                # Evaluate the move
+                
+                # Choose the best move
+        
+        return best_move
 
     def game_process(self):
         if self.current_player == self.human_player:
