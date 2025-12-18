@@ -229,46 +229,38 @@ class Game:
     def run(self):
         self.tic_tac_toe.clear_screen()  # Clear screen at start
         self.tic_tac_toe.welcome()
-        
-        # OUTER LOOP: Handles playing multiple games
-        # This loop continues until the player says "no" to playing again
+        # SINGLE-GAME LOOP: Handles one complete game (all turns until win/draw)
+        # This loop continues until someone wins or it's a draw
         while True:
-            # INNER LOOP: Handles one complete game (all turns until win/draw)
-            # This loop continues until someone wins or it's a draw
-            while True:
- 
-                self.tic_tac_toe.print_grid()
-                self.tic_tac_toe.print_caption()
 
-                # If someone won, break out of the inner loop (end this game)
-                if self.tic_tac_toe.winner:
-                    break
-            
-                # If board is full and no winner, it's a draw - break out of inner loop
-                if N not in self.tic_tac_toe.game_array and not self.tic_tac_toe.winner:
-                    print("\nIt's a DRAW!")
-                    break
+            self.tic_tac_toe.print_grid()
+            self.tic_tac_toe.print_caption()
 
-                # Process one turn: get input, update board, switch players
-                self.tic_tac_toe.game_process()
-                # Check if this move created a winner
-                self.tic_tac_toe.check_winner()
-                # Clear screen after move is made, so next iteration shows clean display
-                self.tic_tac_toe.clear_screen()
-                # Loop back to top of inner loop to show updated board and get next turn
+            # If someone won, break out of the loop (end this game)
+            if self.tic_tac_toe.winner:
+                break
+        
+            # If board is full and no winner, it's a draw - break out of loop
+            if N not in self.tic_tac_toe.game_array and not self.tic_tac_toe.winner:
+                print("\nIt's a DRAW!")
+                break
 
-            # When we get here, the inner loop has ended (game is over - win or draw)
-            # Now ask if players want to play another game
-            play_again = input("\nDo you want to play again? (y/n): ").strip().lower()
-            if play_again == 'y':
-                # Reset the game for a new round
-                self.tic_tac_toe.reset()
-                # Loop back to outer loop to start a new game
-            else:
-                # Player doesn't want to play again, exit the program
-                print("\nThanks for playing NEO TIC-TAC-TOE!")
-                break  # Break out of outer loop, ending the program
+            # Process one turn: get input, update board, switch players
+            self.tic_tac_toe.game_process()
+            # Check if this move created a winner
+            self.tic_tac_toe.check_winner()
+            # Clear screen after move is made, so next iteration shows clean display
+            self.tic_tac_toe.clear_screen()
+            # Loop back to top to show updated board and get next turn
 
 if __name__ == '__main__':
-    game = Game()
-    game.run()
+    # MAIN MENU LOOP: after each game ends, return to main menu (mode selection)
+    while True:
+        game = Game()  # Choose game mode
+        game.run()     # Play one full game with that mode
+
+        # Ask if the player wants to go back to the main menu (choose mode again)
+        choice = input("\nReturn to main menu and play again? (y/n): ").strip().lower()
+        if choice != 'y':
+            print("\nThanks for playing NEO TIC-TAC-TOE!")
+            break
