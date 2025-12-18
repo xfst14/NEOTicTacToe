@@ -181,9 +181,11 @@ class TicTacToe3(TicTacToe):
                 # Bot simulate the move
                 mini_grid[i] = self.bot_player
                 # Evaluate the move
-                
+                score = self.minimax(mini_grid, 0, False)
                 # Choose the best move
-        
+                if score > best_score:
+                    best_score = score
+                    best_move = i
         return best_move
 
     def game_process(self):
