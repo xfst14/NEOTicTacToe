@@ -1,31 +1,12 @@
 from pvp import TicTacToe, N
 import random
-
-
-class TicTacToe2(TicTacToe): # Mode 2 (Player vs BotEZ) using random
-    def __init__(self, game):
+        
+class TicTacToeBot(TicTacToe):
+    def __init__(self, game, game_mode):
         super().__init__(game)
         self.human_player = "X"
         self.bot_player = "O"
-        
-    def game_process(self):
-        if self.current_player == self.human_player:
-            # Use the regular human input flow from the base class
-            super().game_process()
-        else:
-            # Bot plays
-            available = [i for i in range(9)
-                         if self.game_array[i] is None]
-            index = random.choice(available)
-            print(f"Bot plays at position {index + 1}")
-            self.game_array[index] = self.bot_player
-            self.current_player = self.human_player
-        
-class TicTacToe3(TicTacToe):
-    def __init__(self, game):
-        super().__init__(game)
-        self.human_player = "X"
-        self.bot_player = "O"
+        self.game_mode = game_mode
 
     def minimax(self, mini_grid, depth, is_max):
         # Check for winner on the current board state (pass mini_grid to avoid modifying game state)
@@ -84,7 +65,13 @@ class TicTacToe3(TicTacToe):
             super().game_process()
         else:
             # Bot plays
-            index = self.get_best_move()
+            if self.game_mode == 2:
+                available = [i for i in range(9)
+                         if self.game_array[i] is None]
+                index = random.choice(available)
+            else:
+                index = self.get_best_move()
+
             print(f"Bot plays at position {index + 1}")
             self.game_array[index] = self.bot_player
             self.current_player = self.human_player

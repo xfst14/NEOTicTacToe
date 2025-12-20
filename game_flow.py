@@ -1,5 +1,5 @@
 from pvp import TicTacToe, N
-from pve import TicTacToe2, TicTacToe3
+from pve import TicTacToeBot
 
 class Game:
     def __init__(self):
@@ -19,14 +19,11 @@ class Game:
                 print("\nInvalid input. Please enter a number between 1 and 3.")
 
         if game_mode == 1:
-            self.game_mode = 1
             self.tic_tac_toe = TicTacToe(self)
         elif game_mode == 2:
-            self.game_mode = 2
-            self.tic_tac_toe = TicTacToe2(self)
+            self.tic_tac_toe = TicTacToeBot(self, 2)
         elif game_mode == 3:
-            self.game_mode = 3
-            self.tic_tac_toe = TicTacToe3(self)
+            self.tic_tac_toe = TicTacToeBot(self, 3)
 
     def run(self):
         self.tic_tac_toe.clear_screen()  # Clear screen at start
