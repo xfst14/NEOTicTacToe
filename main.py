@@ -3,9 +3,10 @@ from src.model.rules import GameRules
 from src.model.constants import X, O
 from src.UI.console_view import ConsoleView
 from src.UI.input_handler import InputHandler
-from src.ai.random_ai import RandomAI
-from src.ai.minimax_ai import MinimaxAI
+from src.AI.random_ai import RandomAI
+from src.AI.minimax_ai import MinimaxAI
 from src.controllers.game_controller import GameController
+
 
 class HumanPlayer:
     def __init__(self, symbol, input_handler):
