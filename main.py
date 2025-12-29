@@ -5,7 +5,7 @@ from src.UI.console_view import ConsoleView
 from src.UI.input_handler import InputHandler
 from src.AI.random_ai import RandomAI
 from src.AI.minimax_ai import MinimaxAI
-from src.controllers.game_controller import GameController
+from src.Controllers.game_controller import GameController
 
 
 class HumanPlayer:
