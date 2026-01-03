@@ -73,8 +73,8 @@ def run_menu(screen, clock):
         screen.blit(title, title.get_rect(center=(WIDTH // 2, 120 + y_offset)))
     
         button(screen, button_font, button_pvp, "Player vs Player", mouse_pos)
-        button(screen, button_font, button_randomai, "Player vs Easy AI", mouse_pos)
-        button(screen, button_font, button_minimaxai, "Player vs Hard AI", mouse_pos)
+        button(screen, button_font, button_randomai, "Player vs Bot (Easy)", mouse_pos)
+        button(screen, button_font, button_minimaxai, "Player vs Bot (Hard)", mouse_pos)
     
         pygame.display.flip()
                 
@@ -88,7 +88,7 @@ def run_reset(screen, clock, game_mode):
     button_restart = pygame.Rect(180, 300, 340, 60)
     button_menu = pygame.Rect(180, 380, 340, 60)
     
-    mode_text = {1: "PVP", 2: "EASY AI", 3: "HARD AI"}[game_mode]
+    mode_text = {1: "PVP", 2: "Bot (Easy)", 3: "Bot (Hard)"}[game_mode]
     
     while True:
         clock.tick(60)

@@ -37,17 +37,6 @@ def main():
             draw_board(screen, board.grid)
             pygame.display.flip()
             
-            # TODO: Game logic and mouse input will be handled by another person
-            # For now, the board is displayed with empty state
-            
-            # Placeholder: This will be replaced with actual game logic
-            # When game ends, break to show reset screen
-            # break
-            
-            # Temporary: Press ESC to go to reset screen (for testing)
-            keys = pygame.key.get_pressed()
-            if keys[pygame.K_ESCAPE]:
-                break
         
         # Show reset screen after game ends
         action = run_reset(screen, clock, game_mode)

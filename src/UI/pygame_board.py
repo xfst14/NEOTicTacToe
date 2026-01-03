@@ -13,7 +13,6 @@ GRID_COLOR = (180, 200, 220)
 def draw_board(screen, board_state):
     """
     Draw the tic-tac-toe board on the screen.
-    board_state: list of 9 elements representing the board (None, "X", or "O")
     """
     WIDTH, HEIGHT = screen.get_size()
     
