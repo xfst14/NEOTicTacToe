@@ -25,22 +25,20 @@ def run_menu(screen, clock):
 
     # Load logo if it exists
     logo = None
-    logo_paths = ["logo.png", "assets/logo.png", "images/logo.png", "src/assets/logo.png"]
-    for path in logo_paths:
-        if os.path.exists(path):
-            try:
-                logo = pygame.image.load(path)
-                # Scale logo to reasonable size (max width 200px, maintain aspect ratio)
-                logo_width = min(200, logo.get_width())
-                logo_height = int(logo.get_height() * (logo_width / logo.get_width()))
-                logo = pygame.transform.scale(logo, (logo_width, logo_height))
-                break
-            except pygame.error:
-                continue
+    logo_path = "src/assets/logo.png"
+    if os.path.exists(logo_path):
+        try:
+            logo = pygame.image.load(logo_path)
+            # Scale logo to reasonable size (max width 200px, maintain aspect ratio)
+            logo_width = min(200, logo.get_width())
+            logo_height = int(logo.get_height() * (logo_width / logo.get_width()))
+            logo = pygame.transform.scale(logo, (logo_width, logo_height))
+        except pygame.error:
+            pass
 
-    button_pvp = pygame.Rect(200, 170, 300, 60)
-    button_randomai = pygame.Rect(200, 250, 300, 60)
-    button_minimaxai = pygame.Rect(200, 330, 300, 60)
+    button_pvp = pygame.Rect(200, 220, 300, 60)
+    button_randomai = pygame.Rect(200, 300, 300, 60)
+    button_minimaxai = pygame.Rect(200, 380, 300, 60)
     
     while True:
         clock.tick(60)
@@ -67,15 +65,12 @@ def run_menu(screen, clock):
         # Draw logo if available
         y_offset = 0
         if logo:
-            logo_rect = logo.get_rect(center=(WIDTH // 2, 50))
+            logo_rect = logo.get_rect(center=(WIDTH // 2, 80))
             screen.blit(logo, logo_rect)
             y_offset = 60  # Adjust title position if logo is present
         
         title = title_font.render("NEO TIC-TAC-TOE", True, YELLOW)
-        screen.blit(title, title.get_rect(center=(WIDTH // 2, 90 + y_offset)))
-    
-        subtitle = info_font.render("Choose a game mode!", True, YELLOW)
-        screen.blit(subtitle, subtitle.get_rect(center=(WIDTH // 2, 135 + y_offset)))
+        screen.blit(title, title.get_rect(center=(WIDTH // 2, 120 + y_offset)))
     
         button(screen, button_font, button_pvp, "Player vs Player", mouse_pos)
         button(screen, button_font, button_randomai, "Player vs Easy AI", mouse_pos)
