@@ -37,7 +37,6 @@ def main():
             draw_board(screen, board.grid)
             pygame.display.flip()
             
-        
         # Show reset screen after game ends
         action = run_reset(screen, clock, game_mode)
         

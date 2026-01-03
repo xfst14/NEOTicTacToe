@@ -1,4 +1,5 @@
 import pygame
+import os
 from src.model.constants import X, O, N
 
 # rgb color (adapted from nct logo)
@@ -22,10 +23,35 @@ def draw_board(screen, board_state):
     board_x = (WIDTH - board_size) // 2
     board_y = (HEIGHT - board_size) // 2
     
+    # Load X and O images
+    x_image = None
+    o_image = None
+    x_path = "src/assets/X.png"
+    o_path = "src/assets/O.png"
+    
+    if os.path.exists(x_path):
+        try:
+            x_image = pygame.image.load(x_path)
+            # Scale image to fit in cell (leave some padding)
+            image_size = int(cell_size * 0.8)
+            x_image = pygame.transform.scale(x_image, (image_size, image_size))
+        except pygame.error:
+            pass
+    
+    if os.path.exists(o_path):
+        try:
+            o_image = pygame.image.load(o_path)
+            # Scale image to fit in cell (leave some padding)
+            image_size = int(cell_size * 0.8)
+            o_image = pygame.transform.scale(o_image, (image_size, image_size))
+        except pygame.error:
+            pass
+    
     # Draw board background
     pygame.draw.rect(screen, DARKBLUE, 
                     (board_x - 10, board_y - 10, board_size + 20, board_size + 20), 
                     border_radius=15)
+    
     
     # Draw grid lines
     line_width = 4
@@ -38,26 +64,26 @@ def draw_board(screen, board_state):
     for i in range(1, 3):
         y = board_y + i * cell_size
         pygame.draw.line(screen, GRID_COLOR, (board_x, y), (board_x + board_size, y), line_width)
-
     
-    # Draw X and O symbols (increased font size for bigger board)
-    symbol_font = pygame.font.SysFont(None, 120)
-    
+    # Draw X and O images
     for row in range(3):
         for col in range(3):
             index = row * 3 + col
             cell_value = board_state[index] if index < len(board_state) else N
             
-            if cell_value == X:
-                # Draw X in yellow
+            if cell_value == X and x_image:
+                # Draw X image centered in cell
                 x_pos = board_x + col * cell_size + cell_size // 2
                 y_pos = board_y + row * cell_size + cell_size // 2
-                symbol = symbol_font.render("X", True, YELLOW)
-                screen.blit(symbol, symbol.get_rect(center=(x_pos, y_pos)))
-            elif cell_value == O:
-                # Draw O in white
+                image_rect = x_image.get_rect(center=(x_pos, y_pos))
+                screen.blit(x_image, image_rect)
+            elif cell_value == O and o_image:
+                # Draw O image centered in cell
                 x_pos = board_x + col * cell_size + cell_size // 2
                 y_pos = board_y + row * cell_size + cell_size // 2
-                symbol = symbol_font.render("O", True, WHITE)
-                screen.blit(symbol, symbol.get_rect(center=(x_pos, y_pos)))
+                image_rect = o_image.get_rect(center=(x_pos, y_pos))
+                screen.blit(o_image, image_rect)
+
+    
+
 
