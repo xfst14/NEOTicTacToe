@@ -1,5 +1,6 @@
 import pygame
 import sys
+import os
 
 # rgb color (adapted from nct logo)
 SCREENBLUE = (8, 13, 51)
@@ -21,6 +22,21 @@ def run_menu(screen, clock):
     title_font = pygame.font.SysFont(None, 64)
     button_font = pygame.font.SysFont(None, 34)
     info_font = pygame.font.SysFont(None, 28)
+
+    # Load logo if it exists
+    logo = None
+    logo_paths = ["logo.png", "assets/logo.png", "images/logo.png", "src/assets/logo.png"]
+    for path in logo_paths:
+        if os.path.exists(path):
+            try:
+                logo = pygame.image.load(path)
+                # Scale logo to reasonable size (max width 200px, maintain aspect ratio)
+                logo_width = min(200, logo.get_width())
+                logo_height = int(logo.get_height() * (logo_width / logo.get_width()))
+                logo = pygame.transform.scale(logo, (logo_width, logo_height))
+                break
+            except pygame.error:
+                continue
 
     button_pvp = pygame.Rect(200, 170, 300, 60)
     button_randomai = pygame.Rect(200, 250, 300, 60)
@@ -48,11 +64,18 @@ def run_menu(screen, clock):
         # draw menu
         screen.fill(SCREENBLUE)
     
+        # Draw logo if available
+        y_offset = 0
+        if logo:
+            logo_rect = logo.get_rect(center=(WIDTH // 2, 50))
+            screen.blit(logo, logo_rect)
+            y_offset = 60  # Adjust title position if logo is present
+        
         title = title_font.render("NEO TIC-TAC-TOE", True, YELLOW)
-        screen.blit(title, title.get_rect(center=(WIDTH // 2, 90)))
+        screen.blit(title, title.get_rect(center=(WIDTH // 2, 90 + y_offset)))
     
         subtitle = info_font.render("Choose a game mode!", True, YELLOW)
-        screen.blit(subtitle, subtitle.get_rect(center=(WIDTH // 2, 135)))
+        screen.blit(subtitle, subtitle.get_rect(center=(WIDTH // 2, 135 + y_offset)))
     
         button(screen, button_font, button_pvp, "Player vs Player", mouse_pos)
         button(screen, button_font, button_randomai, "Player vs Easy AI", mouse_pos)
