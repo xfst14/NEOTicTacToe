@@ -47,8 +47,7 @@ def run_menu(screen, clock):
         for event in pygame.event.get():
             # quit game
             if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+                return "QUIT"
                 
             # mouse click
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
@@ -97,8 +96,7 @@ def run_reset(screen, clock, game_mode):
         for event in pygame.event.get():
             # quit game
             if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+                return "QUIT"
             
             # mouse click  
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
