@@ -17,8 +17,8 @@ def draw_board(screen, board_state):
     """
     WIDTH, HEIGHT = screen.get_size()
     
-    # Board dimensions (increased size)
-    board_size = 420
+    # Board dimensions
+    board_size = 300
     cell_size = board_size // 3
     board_x = (WIDTH - board_size) // 2
     board_y = (HEIGHT - board_size) // 2

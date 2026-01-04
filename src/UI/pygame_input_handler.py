@@ -17,7 +17,7 @@ class PygameInputHandler:
         self.WIDTH, self.HEIGHT = screen.get_size()
 
         # Board dimensions (must match pygame_board.py)
-        self.board_size = 420
+        self.board_size = 300
         self.cell_size = self.board_size // 3
         self.board_x = (self.WIDTH - self.board_size) // 2
         self.board_y = (self.HEIGHT - self.board_size) // 2
