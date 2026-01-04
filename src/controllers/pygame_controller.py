@@ -1,6 +1,6 @@
 import pygame
 from src.model.constants import X, O
-from src.UI.pygame_board import draw_board
+from src.UI.pygame_board import draw_board, draw_status
 from src.model.rules import GameRules
 
 class PygameController:
@@ -45,10 +45,22 @@ class PygameController:
             self.screen.fill((8, 13, 51))
             draw_board(self.screen, self.board.grid)
 
+            # Display player's turn
+            if not self.game_over:
+                status_msg = f"Current player: {self.current_player.symbol}"
+                draw_status(self.screen, status_msg)
+            else:
+                # If game finish
+                end_msg = f"Winner: {self.winner}" if self.winner else "DRAW!"
+                draw_status(self.screen, end_msg, color=(252, 180, 27))
+
             # Execute game events
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     return "QUIT"
+                
+                if self.game_over and event.type == pygame.MOUSEBUTTONDOWN:
+                    return "GAME_OVER"
                 
                 # Execute player mouse click
                 if not self.game_over and event.type == pygame.MOUSEBUTTONDOWN:
@@ -61,12 +73,6 @@ class PygameController:
             # AI's turn (if game mode is AI)
             if not self.game_over and hasattr(self.current_player, 'get_move'):
                 self.handle_turn()
-
-            # Check to end game loop
-            if self.game_over:
-                pygame.display.flip()
-                pygame.time.delay(1000)
-                return "GAME OVER"
             
             pygame.display.flip()
             clock.tick(60)

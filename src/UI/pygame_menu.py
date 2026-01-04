@@ -44,6 +44,11 @@ def run_menu(screen, clock):
         clock.tick(60)
         mouse_pos = pygame.mouse.get_pos()
         
+        try:
+            WIDTH, HEIGHT = screen.get_size()
+        except pygame.error:
+            return "QUIT"
+        
         for event in pygame.event.get():
             # quit game
             if event.type == pygame.QUIT:

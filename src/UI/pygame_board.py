@@ -84,6 +84,10 @@ def draw_board(screen, board_state):
                 image_rect = o_image.get_rect(center=(x_pos, y_pos))
                 screen.blit(o_image, image_rect)
 
-    
+def draw_status(screen, message, color=YELLOW):
+    WIDTH, HEIGHT = screen.get_size()
+    font = pygame.font.Font(None, 36)
+    text_surface = font.render(message, True, color)
+    text_rect = text_surface.get_rect(center=(WIDTH // 2, 40))
 
-
+    screen.blit(text_surface, text_rect)
