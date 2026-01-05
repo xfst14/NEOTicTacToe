@@ -89,5 +89,16 @@ def draw_status(screen, message, color=YELLOW):
     font = pygame.font.Font(None, 36)
     text_surface = font.render(message, True, color)
     text_rect = text_surface.get_rect(center=(WIDTH // 2, 40))
+    screen.blit(text_surface, text_rect)
 
+def draw_click_to_continue(screen):
+    """Draw 'Click to continue' text under the board"""
+    WIDTH, HEIGHT = screen.get_size()
+    board_size = 300
+    board_y = (HEIGHT - board_size) // 2
+    prompt_y = board_y + board_size + 30
+    
+    font = pygame.font.Font(None, 28)
+    text_surface = font.render("Click to continue", True, WHITE)
+    text_rect = text_surface.get_rect(center=(WIDTH // 2, prompt_y))
     screen.blit(text_surface, text_rect)

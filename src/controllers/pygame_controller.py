@@ -1,6 +1,6 @@
 import pygame
 from src.model.constants import X, O
-from src.UI.pygame_board import draw_board, draw_status
+from src.UI.pygame_board import draw_board, draw_status, draw_click_to_continue
 from src.model.rules import GameRules
 
 class PygameController:
@@ -14,17 +14,19 @@ class PygameController:
         self.current_player = player_x
         self.game_over = False
         self.winner = None
+        self.ai_move_pending = None  # Store AI move to avoid recalculating every frame
 
     def handle_turn(self):
-        move = None
         if self.game_over:
             return
         
-        else:
-            move = self.current_player.get_move(self.board)
+        # Only calculate AI move once per turn
+        if self.ai_move_pending is None:
+            self.ai_move_pending = self.current_player.get_move(self.board)
 
-        if move is not None:
-            self.execute_move(move)
+        if self.ai_move_pending is not None:
+            self.execute_move(self.ai_move_pending)
+            self.ai_move_pending = None  # Reset after move
 
     def execute_move(self, move):
         # update board.grid and check game event
@@ -35,6 +37,7 @@ class PygameController:
             else:
                 # Switch turn
                 self.current_player = self.player_o if self.current_player == self.player_x else self.player_x
+                self.ai_move_pending = None  # Reset AI move for next turn
 
     def run_game(self):
         clock = pygame.time.Clock()
@@ -53,6 +56,7 @@ class PygameController:
                 # If game finish
                 end_msg = f"Winner: {self.winner}" if self.winner else "DRAW!"
                 draw_status(self.screen, end_msg, color=(252, 180, 27))
+                draw_click_to_continue(self.screen)
 
             # Execute game events
             for event in pygame.event.get():
