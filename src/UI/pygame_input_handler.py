@@ -53,30 +53,4 @@ class PygameInputHandler:
 
         return None
 
-    def get_mouse_click(self):
-        """
-        Wait for and return the cell index from a mouse click.
-        This method processes pygame events and returns when a valid cell is clicked.
 
-        Returns:
-            int: cell index (0-8) that was clicked
-        """
-        while True:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    import sys
-                    sys.exit()
-
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    # Get mouse position
-                    pos = pygame.mouse.get_pos()
-
-                    # Convert to cell index
-                    cell_index = self.get_cell_from_pos(pos)
-
-                    if cell_index is not None:
-                        return cell_index
-
-            # Small delay to prevent CPU overuse
-            pygame.time.wait(10)

@@ -7,6 +7,7 @@ from src.UI.pygame_input_handler import PygameInputHandler
 from src.controllers.pygame_controller import PygameController
 from src.AI.random_ai import RandomAI
 from src.AI.minimax_ai import MinimaxAI
+from src.UI.sound_manager import SoundManager
 
 class PygameHumanPlayer:
     def __init__(self, symbol):
@@ -19,6 +20,7 @@ def main():
     clock = pygame.time.Clock()
 
     input_handler = PygameInputHandler(screen)
+    sound_manager = SoundManager()
     
     current_mode = None
     
@@ -27,7 +29,7 @@ def main():
         if current_mode is None:
             score_x = 0
             score_o = 0
-            current_mode = run_menu(screen, clock)
+            current_mode = run_menu(screen, clock, sound_manager)
             if current_mode == "QUIT":
                 break
 
@@ -44,7 +46,7 @@ def main():
             p2 = MinimaxAI("O")
 
         # Run the match
-        controller = PygameController(screen, board, rules, p1, p2, input_handler, score_x, score_o)
+        controller = PygameController(screen, board, rules, p1, p2, input_handler, score_x, score_o, sound_manager)
         result = controller.run_game()
         if result == "QUIT": break
 
@@ -55,7 +57,7 @@ def main():
             score_o += 1 
             
         # Reset menu after finishing the game
-        reset_choice = run_reset(screen, clock, current_mode, score_x, score_o)
+        reset_choice = run_reset(screen, clock, current_mode, score_x, score_o, sound_manager)
         if reset_choice == "RESTART":
             continue
         elif reset_choice == "MENU":
