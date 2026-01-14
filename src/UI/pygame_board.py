@@ -97,8 +97,63 @@ def draw_click_to_continue(screen):
     board_size = 300
     board_y = (HEIGHT - board_size) // 2
     prompt_y = board_y + board_size + 30
-    
+
     font = pygame.font.Font(None, 28)
     text_surface = font.render("Click to continue", True, WHITE)
     text_rect = text_surface.get_rect(center=(WIDTH // 2, prompt_y))
     screen.blit(text_surface, text_rect)
+
+def draw_score(screen, score_x, score_o):
+    """Draw player scores on both sides of the board"""
+    WIDTH, HEIGHT = screen.get_size()
+    board_size = 300
+    board_x = (WIDTH - board_size) // 2
+    board_y = (HEIGHT - board_size) // 2
+
+    # Load X and O images for score display
+    x_image = None
+    o_image = None
+    x_path = "src/assets/X.png"
+    o_path = "src/assets/O.png"
+
+    icon_size = 40
+    if os.path.exists(x_path):
+        try:
+            x_image = pygame.image.load(x_path)
+            x_image = pygame.transform.scale(x_image, (icon_size, icon_size))
+        except pygame.error:
+            pass
+
+    if os.path.exists(o_path):
+        try:
+            o_image = pygame.image.load(o_path)
+            o_image = pygame.transform.scale(o_image, (icon_size, icon_size))
+        except pygame.error:
+            pass
+
+    # Font for scores
+    font = pygame.font.Font(None, 48)
+
+    # Draw X score (left side)
+    x_score_x = board_x - 120
+    x_score_y = board_y + board_size // 2 - 30
+
+    if x_image:
+        x_icon_rect = x_image.get_rect(center=(x_score_x, x_score_y))
+        screen.blit(x_image, x_icon_rect)
+
+    x_score_text = font.render(str(score_x), True, WHITE)
+    x_score_rect = x_score_text.get_rect(center=(x_score_x, x_score_y + 50))
+    screen.blit(x_score_text, x_score_rect)
+
+    # Draw O score (right side)
+    o_score_x = board_x + board_size + 120
+    o_score_y = board_y + board_size // 2 - 30
+
+    if o_image:
+        o_icon_rect = o_image.get_rect(center=(o_score_x, o_score_y))
+        screen.blit(o_image, o_icon_rect)
+
+    o_score_text = font.render(str(score_o), True, WHITE)
+    o_score_rect = o_score_text.get_rect(center=(o_score_x, o_score_y + 50))
+    screen.blit(o_score_text, o_score_rect)

@@ -1,17 +1,17 @@
 import pygame
 from src.model.constants import X, O
-from src.UI.pygame_board import draw_board, draw_status, draw_click_to_continue
+from src.UI.pygame_board import draw_board, draw_status, draw_click_to_continue, draw_score
 from src.model.rules import GameRules
 
 class PygameController:
-    def __init__(self, screen, board, rules, player_x, player_o, input_handler, score_x, score_y):
+    def __init__(self, screen, board, rules, player_x, player_o, input_handler, score_x, score_o):
         self.screen = screen
         self.board = board
         self.rules = rules
         self.player_x = player_x
         self.player_o = player_o
         self.score_x = score_x
-        self.score_y = score_y
+        self.score_o = score_o
         self.input_handler = input_handler
         self.current_player = player_x
         self.game_over = False
@@ -49,6 +49,7 @@ class PygameController:
             # Draw UI
             self.screen.fill((8, 13, 51))
             draw_board(self.screen, self.board.grid)
+            draw_score(self.screen, self.score_x, self.score_o)
 
             # Display player's turn
             if not self.game_over:

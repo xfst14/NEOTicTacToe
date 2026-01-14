@@ -26,7 +26,7 @@ def main():
         # Appear main menu
         if current_mode is None:
             score_x = 0
-            score_y = 0
+            score_o = 0
             current_mode = run_menu(screen, clock)
             if current_mode == "QUIT":
                 break
@@ -44,15 +44,15 @@ def main():
             p2 = MinimaxAI("O")
 
         # Run the match
-        controller = PygameController(screen, board, rules, p1, p2, input_handler, score_x, score_y)
+        controller = PygameController(screen, board, rules, p1, p2, input_handler, score_x, score_o)
         result = controller.run_game()
         if result == "QUIT": break
 
         # Update player score after the match
         if controller.winner == "X":
             score_x += 1
-        elif controller.winner == "Y":
-            score_y += 1 
+        elif controller.winner == "O":
+            score_o += 1 
             
         # Reset menu after finishing the game
         reset_choice = run_reset(screen, clock, current_mode)
