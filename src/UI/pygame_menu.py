@@ -82,44 +82,90 @@ def run_menu(screen, clock):
     
         pygame.display.flip()
                 
-def run_reset(screen, clock, game_mode):
+def run_reset(screen, clock, game_mode, score_x=0, score_o=0):
     WIDTH, HEIGHT = screen.get_size()
-    
+
     title_font = pygame.font.SysFont(None, 64)
     button_font = pygame.font.SysFont(None, 34)
     info_font = pygame.font.SysFont(None, 28)
-    
-    button_restart = pygame.Rect(180, 300, 340, 60)
-    button_menu = pygame.Rect(180, 380, 340, 60)
-    
+    score_font = pygame.font.SysFont(None, 48)
+
+    button_restart = pygame.Rect(180, 340, 340, 60)
+    button_menu = pygame.Rect(180, 420, 340, 60)
+
     mode_text = {1: "PVP", 2: "Bot (Easy)", 3: "Bot (Hard)"}[game_mode]
-    
+
+    # Load X and O images for score display
+    x_image = None
+    o_image = None
+    x_path = "src/assets/X.png"
+    o_path = "src/assets/O.png"
+
+    icon_size = 50
+    if os.path.exists(x_path):
+        try:
+            x_image = pygame.image.load(x_path)
+            x_image = pygame.transform.scale(x_image, (icon_size, icon_size))
+        except pygame.error:
+            pass
+
+    if os.path.exists(o_path):
+        try:
+            o_image = pygame.image.load(o_path)
+            o_image = pygame.transform.scale(o_image, (icon_size, icon_size))
+        except pygame.error:
+            pass
+
     while True:
         clock.tick(60)
         mouse_pos = pygame.mouse.get_pos()
-        
+
         for event in pygame.event.get():
             # quit game
             if event.type == pygame.QUIT:
                 return "QUIT"
-            
-            # mouse click  
+
+            # mouse click
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if button_restart.collidepoint(event.pos):
                     return "RESTART"
                 if button_menu.collidepoint(event.pos):
                     return "MENU"
-    
+
         # draw
         screen.fill(SCREENBLUE)
-        
+
         message1 = title_font.render("Thank you for playing!", True, YELLOW)
-        screen.blit(message1, message1.get_rect(center=(WIDTH // 2, 120)))
-        
+        screen.blit(message1, message1.get_rect(center=(WIDTH // 2, 100)))
+
         message2 = info_font.render(f"Mode: {mode_text}", True, WHITE)
-        screen.blit(message2, message2.get_rect(center=(WIDTH // 2, 170)))
-        
+        screen.blit(message2, message2.get_rect(center=(WIDTH // 2, 150)))
+
+        # Draw score section
+        score_y = 220
+        score_spacing = 120
+
+        # Draw X score (left)
+        x_pos = WIDTH // 2 - score_spacing
+        if x_image:
+            x_icon_rect = x_image.get_rect(center=(x_pos, score_y))
+            screen.blit(x_image, x_icon_rect)
+        x_score_text = score_font.render(str(score_x), True, WHITE)
+        screen.blit(x_score_text, x_score_text.get_rect(center=(x_pos, score_y + 50)))
+
+        # Draw dash separator
+        dash_text = score_font.render("-", True, WHITE)
+        screen.blit(dash_text, dash_text.get_rect(center=(WIDTH // 2, score_y + 25)))
+
+        # Draw O score (right)
+        o_pos = WIDTH // 2 + score_spacing
+        if o_image:
+            o_icon_rect = o_image.get_rect(center=(o_pos, score_y))
+            screen.blit(o_image, o_icon_rect)
+        o_score_text = score_font.render(str(score_o), True, WHITE)
+        screen.blit(o_score_text, o_score_text.get_rect(center=(o_pos, score_y + 50)))
+
         button(screen, button_font, button_restart, "Play again?", mouse_pos)
         button(screen, button_font, button_menu, "Back to menu", mouse_pos)
-        
+
         pygame.display.flip()

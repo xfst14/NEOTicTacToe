@@ -55,7 +55,7 @@ def main():
             score_o += 1 
             
         # Reset menu after finishing the game
-        reset_choice = run_reset(screen, clock, current_mode)
+        reset_choice = run_reset(screen, clock, current_mode, score_x, score_o)
         if reset_choice == "RESTART":
             continue
         elif reset_choice == "MENU":
