@@ -14,8 +14,8 @@ YELLOW = (252, 180, 27)
 
 
 
-def _get_cached_image(path, size):
-    """Load scaled images (caching removed)."""
+def load_image(path, size):
+    """Load scaled images """
     if os.path.exists(path):
         try:
             image = pygame.image.load(path)
@@ -46,8 +46,8 @@ def draw_board(screen, board_state, shake_offset=(0, 0)):
     
     # Load X and O images (cached)
     image_size = int(cell_size * 0.8)
-    x_image = _get_cached_image("src/assets/X.png", image_size)
-    o_image = _get_cached_image("src/assets/O.png", image_size)
+    x_image = load_image("src/assets/X.png", image_size)
+    o_image = load_image("src/assets/O.png", image_size)
     
     # Draw board background with slight transparency for glow effect
     bg_surface = pygame.Surface((board_size + 20, board_size + 20), pygame.SRCALPHA)
@@ -55,7 +55,7 @@ def draw_board(screen, board_state, shake_offset=(0, 0)):
                     (0, 0, board_size + 20, board_size + 20), 
                     border_radius=15)
     screen.blit(bg_surface, (board_x - 10, board_y - 10))
-    
+        
     # Draw grid lines with neon glow effect
     line_width = 3
     
@@ -142,8 +142,8 @@ def draw_score(screen, score_x, score_o, shake_offset=(0, 0)):
 
     # Load X and O images for score display (cached)
     icon_size = 40
-    x_image = _get_cached_image("src/assets/X.png", icon_size)
-    o_image = _get_cached_image("src/assets/O.png", icon_size)
+    x_image = load_image("src/assets/X.png", icon_size)
+    o_image = load_image("src/assets/O.png", icon_size)
 
     # Draw X score (left side)
     x_score_x = board_x - 120

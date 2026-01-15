@@ -1,5 +1,4 @@
 import pygame
-import sys
 from src.model.board import Board
 from src.model.rules import GameRules
 from src.UI.pygame_menu import run_menu, run_reset
@@ -7,7 +6,7 @@ from src.UI.pygame_input_handler import PygameInputHandler
 from src.controllers.pygame_controller import PygameController
 from src.AI.random_ai import RandomAI
 from src.AI.minimax_ai import MinimaxAI
-from src.UI.sound_manager import SoundManager
+from src.Sounds.sound_manager import SoundManager
 
 class PygameHumanPlayer:
     def __init__(self, symbol):

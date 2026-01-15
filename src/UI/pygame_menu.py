@@ -1,7 +1,5 @@
 import pygame
-import sys
 import os
-import math
 from src.UI.retro_effects import (
     RetroBackground,
     NEON_CYAN, NEON_YELLOW, RETRO_PINK
@@ -201,7 +199,7 @@ def run_reset(screen, clock, game_mode, score_x=0, score_o=0, sound_manager=None
         message2 = info_font.render(f"Mode: {mode_text}", True, WHITE)
         screen.blit(message2, message2.get_rect(center=(WIDTH // 2, 130)))
         
-        # Draw score section with pulsing effect
+        # Draw score section 
         score_y = 200
         score_spacing = 120
         
