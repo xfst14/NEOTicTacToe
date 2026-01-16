@@ -2,14 +2,14 @@ import pygame
 import os
 from src.UI.retro_effects import (
     RetroBackground,
-    NEON_CYAN, NEON_YELLOW, RETRO_PINK
+    NEON_CYAN, NEON_YELLOW
 )
 
 # rgb color (adapted from nct logo with retro enhancement)
 SCREENBLUE = (8, 13, 51)
 LIGHTBLUE = (72, 150, 172)
 WHITE = (245, 245, 245)
-
+FONT_PATH = "src/assets/prstartk.ttf"
 
 def _get_logo():
     """Load logo (caching removed)."""
@@ -49,7 +49,7 @@ class RetroButton:
         pygame.draw.rect(screen, color, self.rect, width=2, border_radius=12)
         
         # Draw text
-        font = pygame.font.SysFont('consolas', 28, bold=True)
+        font = pygame.font.SysFont('consolas', 24, bold=True)
         text_surface = font.render(self.text, True, WHITE)
         text_rect = text_surface.get_rect(center=self.rect.center)
         screen.blit(text_surface, text_rect)
@@ -118,7 +118,7 @@ def run_menu(screen, clock, sound_manager=None):
             y_offset = 60
         
         # Draw title
-        title_font = pygame.font.SysFont('consolas', 56, bold=True)
+        title_font = pygame.font.Font(FONT_PATH, 36)
         title_surface = title_font.render("NEO TIC-TAC-TOE", True, NEON_YELLOW)
         screen.blit(title_surface, title_surface.get_rect(center=(WIDTH // 2, 120 + y_offset)))
         
@@ -137,8 +137,8 @@ def run_reset(screen, clock, game_mode, score_x=0, score_o=0, sound_manager=None
     retro_bg = RetroBackground(WIDTH, HEIGHT)
     
     # Create retro buttons
-    button_restart = RetroButton(pygame.Rect(180, 340, 340, 60), "PLAY AGAIN?", LIGHTBLUE)
-    button_menu = RetroButton(pygame.Rect(180, 420, 340, 60), "BACK TO MENU", LIGHTBLUE)
+    button_restart = RetroButton(pygame.Rect(200, 340, 300, 60), "PLAY AGAIN?", LIGHTBLUE)
+    button_menu = RetroButton(pygame.Rect(200, 420, 300, 60), "BACK TO MENU", LIGHTBLUE)
     
     buttons = [button_restart, button_menu]
     
@@ -205,7 +205,7 @@ def run_reset(screen, clock, game_mode, score_x=0, score_o=0, sound_manager=None
         
         # Draw "VS" text
         vs_font = pygame.font.SysFont('consolas', 32, bold=True)
-        vs_text = vs_font.render("VS", True, RETRO_PINK)
+        vs_text = vs_font.render("VS", True, NEON_CYAN)
         screen.blit(vs_text, vs_text.get_rect(center=(WIDTH // 2, score_y + 25)))
         
         # Draw X score (left)
@@ -214,7 +214,7 @@ def run_reset(screen, clock, game_mode, score_x=0, score_o=0, sound_manager=None
         if x_image:
             x_icon_rect = x_image.get_rect(center=(x_pos, score_y))
             screen.blit(x_image, x_icon_rect)
-        x_score_text = score_font.render(str(score_x), True, NEON_YELLOW)
+        x_score_text = score_font.render(str(score_x), True, WHITE)
         screen.blit(x_score_text, x_score_text.get_rect(center=(x_pos, score_y + 55)))
         
         # Draw O score (right)
@@ -222,7 +222,7 @@ def run_reset(screen, clock, game_mode, score_x=0, score_o=0, sound_manager=None
         if o_image:
             o_icon_rect = o_image.get_rect(center=(o_pos, score_y))
             screen.blit(o_image, o_icon_rect)
-        o_score_text = score_font.render(str(score_o), True, NEON_CYAN)
+        o_score_text = score_font.render(str(score_o), True, WHITE)
         screen.blit(o_score_text, o_score_text.get_rect(center=(o_pos, score_y + 55)))
         
         # Draw buttons
