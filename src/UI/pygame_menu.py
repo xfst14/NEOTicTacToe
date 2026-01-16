@@ -190,9 +190,9 @@ def run_reset(screen, clock, game_mode, score_x=0, score_o=0, sound_manager=None
         screen.fill(SCREENBLUE)
         retro_bg.draw(screen)
         
-        # Draw game over message
-        title_font = pygame.font.SysFont('consolas', 56, bold=True)
-        message1 = title_font.render("GAME OVER", True, NEON_YELLOW)
+        # Draw "thank you for playing" message
+        title_font = pygame.font.SysFont('consolas', 46, bold=True)
+        message1 = title_font.render("THANK YOU FOR PLAYING!", True, NEON_YELLOW)
         screen.blit(message1, message1.get_rect(center=(WIDTH // 2, 80)))
         
         info_font = pygame.font.SysFont('consolas', 24, bold=True)
