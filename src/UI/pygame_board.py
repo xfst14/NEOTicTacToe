@@ -154,7 +154,7 @@ def draw_score(screen, score_x, score_o, shake_offset=(0, 0)):
         screen.blit(x_image, x_icon_rect)
 
     font = pygame.font.SysFont('consolas', 48, bold=True)
-    x_score_text = font.render(str(score_x), True, NEON_YELLOW)
+    x_score_text = font.render(str(score_x), True, WHITE)
     x_score_rect = x_score_text.get_rect(center=(x_score_x, x_score_y + 55))
     screen.blit(x_score_text, x_score_rect)
 
@@ -166,6 +166,6 @@ def draw_score(screen, score_x, score_o, shake_offset=(0, 0)):
         o_icon_rect = o_image.get_rect(center=(o_score_x, o_score_y))
         screen.blit(o_image, o_icon_rect)
 
-    o_score_text = font.render(str(score_o), True, NEON_CYAN)
+    o_score_text = font.render(str(score_o), True, WHITE)
     o_score_rect = o_score_text.get_rect(center=(o_score_x, o_score_y + 55))
     screen.blit(o_score_text, o_score_rect)
