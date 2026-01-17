@@ -4,9 +4,6 @@ import random
 # Retro color palette (neon cyberpunk theme)
 NEON_CYAN = (0, 255, 255)
 NEON_YELLOW = (255, 255, 0)
-RETRO_PURPLE = (138, 43, 226)
-RETRO_PINK = (255, 20, 147)
-
 
 class RetroBackground:
     """retro background with scanlines and grid effects."""
