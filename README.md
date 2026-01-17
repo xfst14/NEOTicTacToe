@@ -1,10 +1,10 @@
 # NEOTicTacToe
 
-NEOTicTacToe is a modern take on the classic game, wrapped in a **neon cyberpunk aesthetic** with **immersive audio** and an **unbeatable Minimax AI**. It offers a dual-interface experience: a visually rich **Graphical Mode** with CRT scanlines, moving grids, and reactive screen shakes, alongside a lightweight **Console Mode** for quick terminal play. Whether battling a friend (PvP) or challenging the AI, every move is a digital spectacle.
+Neo Tic-Tac-Toe is a Python-based implementation of the classic Tic-Tac-Toe, evolved through three distinct stages of development featuring both Player vs Player and Player vs AI modes. It transitions from a command-line interface logic engine to a fully interactive graphical application powered by Pygame.
 
 ## Features
 
-- **Retro Cyberpunk UI:** Neon color palette, dynamic background animations, CRT scanlines, and screen shake effects.
+- **Retro Cyberpunk UI:** Neon color palette, dynamic background animations, and screen shake effects.
 - **Unbeatable AI:** Challenge the Hard mode powered by the Minimax algorithm, or practice against the Easy Random AI.
 - **Dual Interface:** Choose between the full GUI experience (Pygame) or the fast CLI version using `pygame_main.py` or `main.py`.
 - **Immersive Audio:** Custom sound effects for moves, wins, and interactions.
