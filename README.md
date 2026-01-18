@@ -4,7 +4,7 @@ Neo Tic-Tac-Toe is a Python-based implementation of the classic Tic-Tac-Toe, evo
 
 ## Features
 
-- **Retro Cyberpunk UI:** Neon color palette, dynamic background animations, and screen shake effects.
+- **Retro UI:** Neon color palette, dynamic background animations, and screen shake effects.
 - **Unbeatable AI:** Challenge the Hard mode powered by the Minimax algorithm, or practice against the Easy Random AI.
 - **Dual Interface:** Choose between the full GUI experience (Pygame) or the fast CLI version using `pygame_main.py` or `main.py`.
 - **Immersive Audio:** Custom sound effects for moves, wins, and interactions.
