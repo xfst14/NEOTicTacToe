@@ -34,7 +34,7 @@ class SoundManager:
         if path and os.path.exists(path):
             try:
                 pygame.mixer.music.load(path)
-                pygame.mixer.music.set_volume(0.2) 
+                pygame.mixer.music.set_volume(0.01) 
                 pygame.mixer.music.play(-1) # Loop indefinitely
             except Exception as e:
                 print(f"Error playing background music: {e}")
