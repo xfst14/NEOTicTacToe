@@ -7,7 +7,6 @@ from src.AI.random_ai import RandomAI
 from src.AI.minimax_ai import MinimaxAI
 from src.controllers.game_controller import GameController
 
-
 class HumanPlayer:
     def __init__(self, symbol, input_handler):
         self.symbol = symbol
@@ -16,7 +15,6 @@ class HumanPlayer:
     def get_move(self, board):
         return self.input_handler.get_move()
     
-
 def main():
     view = ConsoleView()
     input_handler = InputHandler()
