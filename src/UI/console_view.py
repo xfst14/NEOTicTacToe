@@ -3,11 +3,11 @@ from src.model.constants import X, O
 
 class ConsoleView:
 
-    @staticmethod
+  
     def clear_screen():
         os.system('cls' if os.name == 'nt' else 'clear')
 
-    @staticmethod
+
     def display_welcome():
         print("\n=== NEO TIC-TAC-TOE ===")
         print("To play, enter the number of the cell (1-9):")
@@ -18,7 +18,7 @@ class ConsoleView:
         print(" 7 | 8 | 9 ")
         print("\nLet's start! Player X goes first.\n")
     
-    @staticmethod
+    
     def display_board(game_array):
         display_array = [cell if cell in ("X", "O") else '-' for cell in game_array]
         
@@ -29,19 +29,19 @@ class ConsoleView:
         print("-----------")
         print(f" {display_array[6]} | {display_array[7]} | {display_array[8]} ")
 
-    @staticmethod
+    
     def display_turn(player_symbol):
         print(f"\nPlayer {player_symbol}'s turn.")
 
-    @staticmethod
+    
     def display_winner(winner):
         print(f"\n{winner} WINS !!!")
 
-    @staticmethod
+    
     def display_draw():
         print("It's a DRAW!")
 
-    @staticmethod
+    
     def display_message(message):
         print(message)
 

@@ -4,16 +4,17 @@ from src.UI.retro_effects import (
     RetroBackground,
     NEON_CYAN, NEON_YELLOW
 )
+from src.utils.resource_handler import get_resource_path
 
 # rgb color (adapted from nct logo with retro enhancement)
 SCREENBLUE = (8, 13, 51)
 LIGHTBLUE = (72, 150, 172)
 WHITE = (245, 245, 245)
-FONT_PATH = "src/assets/prstartk.ttf"
+FONT_PATH = get_resource_path("src/assets/prstartk.ttf")
 
 def _get_logo():
-    """Load logo (caching removed)."""
-    logo_path = "src/assets/logo.png"
+    """Load logo """
+    logo_path = get_resource_path("src/assets/logo.png")
     if os.path.exists(logo_path):
         try:
             logo = pygame.image.load(logo_path)
@@ -62,7 +63,7 @@ class RetroButton:
 
 
 def run_menu(screen, clock, sound_manager=None):
-    """Run the main menu with retro effects."""
+    """Run the main menu """
     WIDTH, HEIGHT = screen.get_size()
     
     # Initialize retro background
@@ -130,7 +131,7 @@ def run_menu(screen, clock, sound_manager=None):
 
 
 def run_reset(screen, clock, game_mode, score_x=0, score_o=0, sound_manager=None):
-    """Run the reset/game over screen with retro effects."""
+    """Run the reset/game over screen """
     WIDTH, HEIGHT = screen.get_size()
     
     # Initialize retro background
@@ -148,8 +149,8 @@ def run_reset(screen, clock, game_mode, score_x=0, score_o=0, sound_manager=None
     icon_size = 50
     x_image = None
     o_image = None
-    x_path = "src/assets/X.png"
-    o_path = "src/assets/O.png"
+    x_path = get_resource_path("src/assets/X.png")
+    o_path = get_resource_path("src/assets/O.png")
     
     if os.path.exists(x_path):
         try:
