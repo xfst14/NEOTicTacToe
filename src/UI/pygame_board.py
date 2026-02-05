@@ -12,26 +12,34 @@ LIGHTBLUE = (72, 150, 172)
 WHITE = (245, 245, 245)
 YELLOW = (252, 180, 27)
 
-
+_image_cache = {}
 
 def load_image(path, size):
     """Load scaled images """
+    key = (path, size)
+    if key in _image_cache:
+        return _image_cache[key]
+    
     if os.path.exists(path):
         try:
-            image = pygame.image.load(path)
-            return pygame.transform.scale(image, (size, size))
+            image = pygame.image.load(path).convert_alpha()
+            image = pygame.transform.smoothscale(image, (size, size))
+            _image_cache[key] = image
+            return image
         except pygame.error:
             return None
     return None
 
-
 def get_board_dimensions(screen):
     """Get board position and size (centralized for consistency)."""
     WIDTH, HEIGHT = screen.get_size()
-    board_size = 300
+    
+    board_size = int(min(WIDTH, HEIGHT) * 0.6)
+    board_size = max(280, min(board_size, 720))
+    
     cell_size = board_size // 3
     board_x = (WIDTH - board_size) // 2
-    board_y = (HEIGHT - board_size) // 2
+    board_y = (HEIGHT - board_size) // 2 + int(HEIGHT * 0.05)
     return board_x, board_y, board_size, cell_size
 
 def draw_board(screen, board_state, shake_offset=(0, 0)):
@@ -116,56 +124,66 @@ def draw_status(screen, message, color=NEON_YELLOW):
     """Draw status message."""
     WIDTH, HEIGHT = screen.get_size()
     
-    font = pygame.font.SysFont('consolas', 36, bold=True)
+    font_size = int(HEIGHT * 0.08)
+    font_size = max(24, min(font_size, 64))
+    
+    font = pygame.font.SysFont('consolas', font_size, bold=True)
     text_surface = font.render(message, True, color)
-    text_rect = text_surface.get_rect(center=(WIDTH // 2, 40))
-    screen.blit(text_surface, text_rect)
+    y = int(HEIGHT * 0.1)
+    screen.blit(text_surface, text_surface.get_rect(center=(WIDTH // 2, y)))
 
 def draw_click_to_continue(screen):
     """Draw 'Click to continue' text."""
     WIDTH, HEIGHT = screen.get_size()
-    board_size = 300
-    board_y = (HEIGHT - board_size) // 2
-    prompt_y = board_y + board_size + 35
-
-    font = pygame.font.SysFont('consolas', 24, bold=True)
+    board_x,board_y, board_size, cell_size = get_board_dimensions(screen)
+    
+    font_size = int(HEIGHT * 0.06)
+    font_size = max(18, min(font_size, 48))
+    font = pygame.font.SysFont('consolas', font_size, bold=True)
+    
+    gap = int(board_size * 0.12)
+    gap = max(22, min(gap, 70))
+    prompt_y = board_y + board_size + gap
+    bottom_margin = int(HEIGHT * 0.06)
+    prompt_y = min(prompt_y, HEIGHT - bottom_margin)
+    
     text_surface = font.render("[ CLICK TO CONTINUE ]", True, NEON_CYAN)
-    text_rect = text_surface.get_rect(center=(WIDTH // 2, prompt_y))
-    screen.blit(text_surface, text_rect)
+    screen.blit(text_surface, text_surface.get_rect(center=(WIDTH // 2, prompt_y)))
 
 def draw_score(screen, score_x, score_o, shake_offset=(0, 0)):
     """Draw player scores on both sides of the board with retro styling."""
     WIDTH, HEIGHT = screen.get_size()
-    board_size = 300
-    board_x = (WIDTH - board_size) // 2 + shake_offset[0]
-    board_y = (HEIGHT - board_size) // 2 + shake_offset[1]
-
+    board_x, board_y, board_size, cell_size = get_board_dimensions(screen)
+    board_x += shake_offset[0]
+    board_y += shake_offset[1]
+    
     # Load X and O images for score display (cached)
-    icon_size = 40
+    icon_size = int(cell_size * 0.85)
+    icon_size = max(40, min(icon_size, 90))
     x_image = load_image("src/assets/X.png", icon_size)
     o_image = load_image("src/assets/O.png", icon_size)
 
-    # Draw X score (left side)
-    x_score_x = board_x - 120
-    x_score_y = board_y + board_size // 2 - 30
-
+    # Resize based on window height
+    font_size = int(HEIGHT * 0.09)
+    font_size = max(24, min(font_size, 56))
+    font = pygame.font.SysFont('consolas', font_size, bold=True)
+    
+    icon_num_gap = int(icon_size * 0.9)
+    icon_num_gap = max(42, min(icon_num_gap, 72))
+    
+    side_gap = int(board_size * 0.22)
+    side_gap = max(85, min(side_gap, 155))
+    
+    left_x = board_x - side_gap
+    right_x = board_x + board_size + side_gap
+    center_y = board_y + board_size // 2
+    
     if x_image:
-        x_icon_rect = x_image.get_rect(center=(x_score_x, x_score_y))
-        screen.blit(x_image, x_icon_rect)
-
-    font = pygame.font.SysFont('consolas', 48, bold=True)
-    x_score_text = font.render(str(score_x), True, WHITE)
-    x_score_rect = x_score_text.get_rect(center=(x_score_x, x_score_y + 55))
-    screen.blit(x_score_text, x_score_rect)
-
-    # Draw O score (right side)
-    o_score_x = board_x + board_size + 120
-    o_score_y = board_y + board_size // 2 - 30
+        screen.blit(x_image, x_image.get_rect(center=(left_x, center_y)))
+    x_text = font.render(str(score_x), True, WHITE)
+    screen.blit(x_text, x_text.get_rect(center=(left_x, center_y + icon_num_gap)))
 
     if o_image:
-        o_icon_rect = o_image.get_rect(center=(o_score_x, o_score_y))
-        screen.blit(o_image, o_icon_rect)
-
-    o_score_text = font.render(str(score_o), True, WHITE)
-    o_score_rect = o_score_text.get_rect(center=(o_score_x, o_score_y + 55))
-    screen.blit(o_score_text, o_score_rect)
+        screen.blit(o_image, o_image.get_rect(center=(right_x, center_y)))
+    o_text = font.render(str(score_o), True, WHITE)
+    screen.blit(o_text, o_text.get_rect(center=(right_x, center_y + icon_num_gap)))

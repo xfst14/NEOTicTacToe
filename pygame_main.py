@@ -14,7 +14,9 @@ class PygameHumanPlayer:
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode((700, 500))
+    WINDOWED_SIZE = (700, 500)
+    DISPLAY_FLAGS = pygame.RESIZABLE
+    screen = pygame.display.set_mode(WINDOWED_SIZE, DISPLAY_FLAGS)
     pygame.display.set_caption("NEO TIC-TAC-TOE")
     clock = pygame.time.Clock()
 
@@ -28,7 +30,7 @@ def main():
         if current_mode is None:
             score_x = 0
             score_o = 0
-            current_mode = run_menu(screen, clock, sound_manager)
+            current_mode, screen = run_menu(screen, clock, sound_manager)
             if current_mode == "QUIT":
                 break
 
@@ -56,7 +58,7 @@ def main():
             score_o += 1 
             
         # Reset menu after finishing the game
-        reset_choice = run_reset(screen, clock, current_mode, score_x, score_o, sound_manager)
+        reset_choice, screen = run_reset(screen, clock, current_mode, score_x, score_o, sound_manager)
         if reset_choice == "RESTART":
             continue
         elif reset_choice == "MENU":

@@ -131,7 +131,16 @@ class PygameController:
 
             # Execute game events
             for event in pygame.event.get():
+                if event.type == pygame.VIDEORESIZE:
+                    if hasattr(self, "input_handler") and hasattr(self.input_handler, "screen"):
+                        self.input_handler.screen = self.screen
+                    
+                    width, height = self.screen.get_size()
+                    self.retro_bg = RetroBackground(width, height)
+                
                 if event.type == pygame.QUIT:
+                    return "QUIT"
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     return "QUIT"
                 
                 if self.game_over and event.type == pygame.MOUSEBUTTONDOWN:
