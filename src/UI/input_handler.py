@@ -1,6 +1,6 @@
 class InputHandler:
     
-    @staticmethod
+    
     def get_move():
         while True:
             try:
@@ -11,7 +11,7 @@ class InputHandler:
             except ValueError:
                 print("Invalid input. Please choose between 1 and 9.")
 
-    @staticmethod
+
     def get_game_mode():
         print("Game modes:")
         print("1. Human vs Human ")

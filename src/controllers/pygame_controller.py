@@ -11,7 +11,6 @@ from src.UI.retro_effects import (
 # Background color
 SCREENBLUE = (8, 13, 51)
 
-
 class PygameController:
     def __init__(self, screen, board, rules, player_x, player_o, input_handler, score_x, score_o, sound_manager=None):
         self.screen = screen

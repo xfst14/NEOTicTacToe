@@ -1,6 +1,7 @@
 
 import pygame
 import os
+from src.utils.resource_handler import get_resource_path
 
 class SoundManager:
 
@@ -17,10 +18,10 @@ class SoundManager:
             base_path = os.path.join("src", "Sounds")
             
             # Store sound paths
-            self.sound_paths["bg_music"] = os.path.join(base_path, "bg_music.mp3")
-            self.sound_paths["button"] = os.path.join(base_path, "button_sfx.mp3")
-            self.sound_paths["place"] = os.path.join(base_path, "place_sound.mp3")
-            self.sound_paths["game_end"] = os.path.join(base_path, "game_end_sfx.mp3")
+            self.sound_paths["bg_music"] = get_resource_path(os.path.join(base_path, "bg_music.mp3"))
+            self.sound_paths["button"] = get_resource_path(os.path.join(base_path, "button_sfx.mp3"))
+            self.sound_paths["place"] = get_resource_path(os.path.join(base_path, "place_sound.mp3"))
+            self.sound_paths["game_end"] = get_resource_path(os.path.join(base_path, "game_end_sfx.mp3"))
             
             # Start bg music immediately
             if os.path.exists(self.sound_paths["bg_music"]):
