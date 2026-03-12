@@ -10,14 +10,14 @@ from src.utils.resource_handler import get_resource_path
 SCREENBLUE = (8, 13, 51)
 LIGHTBLUE = (72, 150, 172)
 WHITE = (245, 245, 245)
-FONT_PATH = get_resource_path("src/assets/prstartk.ttf")
+FONT_PATH = get_resource_path("assets/prstartk.ttf")
 
 WINDOWED_SIZE = (700, 500)
 DISPLAY_FLAGS = pygame.RESIZABLE
 
 def _get_logo():
     """Load logo """
-    logo_path = get_resource_path("src/assets/logo.png")
+    logo_path = get_resource_path("assets/logo.png")
     if os.path.exists(logo_path):
         try:
             logo = pygame.image.load(logo_path)
@@ -202,8 +202,8 @@ def run_reset(screen, clock, game_mode, score_x=0, score_o=0, sound_manager=None
     # Load X and O images
     x_image_raw = None
     o_image_raw = None
-    x_path = "src/assets/X.png"
-    o_path = "src/assets/O.png"
+    x_path = get_resource_path("assets/X.png")
+    o_path = get_resource_path("assets/O.png")
     
     if os.path.exists(x_path):
         try:
@@ -301,7 +301,7 @@ def run_reset(screen, clock, game_mode, score_x=0, score_o=0, sound_manager=None
         screen.blit(vs_text, vs_text.get_rect(center=(WIDTH // 2, score_y + int(25 * scale))))
         
         # Icon size
-        icon_size = max(30, int(50 * scale))
+        icon_size = max(40, int(80 * scale))
         x_image = (
             pygame.transform.smoothscale(x_image_raw, (icon_size, icon_size))
             if x_image_raw else None
@@ -315,7 +315,7 @@ def run_reset(screen, clock, game_mode, score_x=0, score_o=0, sound_manager=None
         score_font = font_scale(None, 48, scale, bold=True)
         x_pos = WIDTH // 2 - score_spacing
         if x_image:
-            x_icon_rect = x_image.get_rect(center=(x_pos, score_y))
+            x_icon_rect = x_image.get_rect(center=(x_pos, score_y - int(20 * scale)))
             screen.blit(x_image, x_icon_rect)
         x_score_text = score_font.render(str(score_x), True, WHITE)
         screen.blit(x_score_text, x_score_text.get_rect(center=(x_pos, score_y + int(55 * scale))))
@@ -323,7 +323,7 @@ def run_reset(screen, clock, game_mode, score_x=0, score_o=0, sound_manager=None
         # Draw O score (right)
         o_pos = WIDTH // 2 + score_spacing
         if o_image:
-            o_icon_rect = o_image.get_rect(center=(o_pos, score_y))
+            o_icon_rect = o_image.get_rect(center=(o_pos, score_y - int(20 * scale)))
             screen.blit(o_image, o_icon_rect)
         o_score_text = score_font.render(str(score_o), True, WHITE)
         screen.blit(o_score_text, o_score_text.get_rect(center=(o_pos, score_y + int(55 * scale))))

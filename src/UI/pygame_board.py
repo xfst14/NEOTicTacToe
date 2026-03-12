@@ -4,6 +4,7 @@ from src.model.constants import X, O, N
 from src.UI.retro_effects import (
     NEON_CYAN, NEON_YELLOW
 )
+from utils.resource_handler import get_resource_path
 
 # rgb color (adapted from nct logo with retro enhancement)
 SCREENBLUE = (8, 13, 51)
@@ -16,6 +17,7 @@ _image_cache = {}
 
 def load_image(path, size):
     """Load scaled images """
+    path = get_resource_path(path)
     key = (path, size)
     if key in _image_cache:
         return _image_cache[key]
@@ -54,8 +56,8 @@ def draw_board(screen, board_state, shake_offset=(0, 0)):
     
     # Load X and O images (cached)
     image_size = int(cell_size * 0.8)
-    x_image = load_image("src/assets/X.png", image_size)
-    o_image = load_image("src/assets/O.png", image_size)
+    x_image = load_image("assets/X.png", image_size)
+    o_image = load_image("assets/O.png", image_size)
     
     # Draw board background with slight transparency for glow effect
     bg_surface = pygame.Surface((board_size + 20, board_size + 20), pygame.SRCALPHA)
@@ -160,8 +162,8 @@ def draw_score(screen, score_x, score_o, shake_offset=(0, 0)):
     # Load X and O images for score display (cached)
     icon_size = int(cell_size * 0.85)
     icon_size = max(40, min(icon_size, 90))
-    x_image = load_image("src/assets/X.png", icon_size)
-    o_image = load_image("src/assets/O.png", icon_size)
+    x_image = load_image("assets/X.png", icon_size)
+    o_image = load_image("assets/O.png", icon_size)
 
     # Resize based on window height
     font_size = int(HEIGHT * 0.09)
