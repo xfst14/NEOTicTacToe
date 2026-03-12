@@ -15,7 +15,7 @@ class SoundManager:
             if not pygame.mixer.get_init():
                 pygame.mixer.init()
                 
-            base_path = os.path.join("src", "Sounds")
+            base_path = "Sounds"
             
             # Store sound paths
             self.sound_paths["bg_music"] = get_resource_path(os.path.join(base_path, "bg_music.mp3"))
