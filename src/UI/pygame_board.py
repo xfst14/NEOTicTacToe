@@ -4,7 +4,7 @@ from src.model.constants import X, O, N
 from src.UI.retro_effects import (
     NEON_CYAN, NEON_YELLOW
 )
-from utils.resource_handler import get_resource_path
+from src.utils.resource_handler import get_resource_path
 
 # rgb color (adapted from nct logo with retro enhancement)
 SCREENBLUE = (8, 13, 51)
