@@ -5,14 +5,14 @@ Neo Tic-Tac-Toe is a Python-based implementation of the classic Tic-Tac-Toe, evo
 ## Features
 
 - **Retro UI:** Neon color palette, dynamic background animations, and screen shake effects.
-- **Unbeatable AI:** Challenge the Hard mode powered by the Minimax algorithm, or practice against the Easy Random AI.
+- **Unbeatable AI:** Challenge the Hard mode powered by the Minimax or Alibaba Qwen algorithm, or practice against the Easy Random AI.
 - **Dual Interface:** Choose between the full GUI experience (Pygame) or the fast CLI version using `pygame_main.py` or `main.py`.
 - **Immersive Audio:** Custom sound effects for moves, wins, and interactions.
 - **Flexible Gameplay:** Supports Human vs. Human and Human vs. AI modes.
 
 ## Project Structure
 
-- `src/AI`: Contains AI logic (Random AI and Minimax AI).
+- `src/AI`: Contains AI logic (Random AI, Minimax AI or Alibaba Qwen AI).
 - `src/UI`: Handles the user interface, including the retro effects factory and menus.
 - `src/controllers`: Manages game logic and state flow.
 - `src/model`: Core game data structures (Board, Game Rules).
