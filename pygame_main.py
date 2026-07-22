@@ -6,6 +6,7 @@ from src.UI.pygame_input_handler import PygameInputHandler
 from src.controllers.pygame_controller import PygameController
 from src.AI.random_ai import RandomAI
 from src.AI.minimax_ai import MinimaxAI
+from src.AI.alibaba_qwen import AlibabaQwenAI
 from src.Sounds.sound_manager import SoundManager
 
 class PygameHumanPlayer:
@@ -43,8 +44,10 @@ def main():
             p2 = PygameHumanPlayer("O")
         elif current_mode == 2:
             p2 = RandomAI("O")
-        else:
+        elif current_mode == 3:
             p2 = MinimaxAI("O")
+        else:
+            p2 = AlibabaQwenAI("0")
 
         # Run the match
         controller = PygameController(screen, board, rules, p1, p2, input_handler, score_x, score_o, sound_manager)
