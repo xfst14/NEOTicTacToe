@@ -5,6 +5,7 @@ from src.UI.console_view import ConsoleView
 from src.UI.input_handler import InputHandler
 from src.AI.random_ai import RandomAI
 from src.AI.minimax_ai import MinimaxAI
+from src.AI.alibaba_qwen import AlibabaQwenAI
 from src.controllers.game_controller import GameController
 
 class HumanPlayer:
@@ -33,8 +34,10 @@ def main():
             player_o = HumanPlayer(O, input_handler)
         elif game_mode == 2:
             player_o = RandomAI(O)
-        else:
+        elif game_mode == 3:
             player_o = MinimaxAI(O)
+        else:
+            player_o = AlibabaQwenAI(O)
 
         board = Board()
         game = GameController(view, player_x, player_o, board, rules)
