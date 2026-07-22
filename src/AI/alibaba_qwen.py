@@ -10,7 +10,7 @@ class AlibabaQwenAI(BaseAI):
     def __init__(self, symbol, api_key = None, model = "qwen-plus", base_url = None):
         super().__init__(symbol)
         self.opponent = X if symbol == O else O
-        self.api_key = api_key or getenv("DASHSCOPE_API_KEY")
+        self.api_key = api_key or os.getenv("DASHSCOPE_API_KEY")
         if not self.api_key:
             raise ValueError("DASHSCOPE_API_KEY environment variarble (or api_key arg) is required. Get one from Alibaba Cloud Model Studio.")
     
