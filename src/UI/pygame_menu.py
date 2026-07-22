@@ -117,7 +117,7 @@ def run_menu(screen, clock, sound_manager=None):
         center_y_ratio=0.7
     )
 
-    button_pvp, button_randomai, button_minimaxai = buttons
+    button_pvp, button_randomai, button_minimaxai, button_alibabaqwenai = buttons
 
     
     # Animation timer
@@ -154,6 +154,9 @@ def run_menu(screen, clock, sound_manager=None):
             if button_minimaxai.is_clicked(event, WIDTH, HEIGHT, scale):
                 if sound_manager: sound_manager.play_button_click()
                 return 3, screen
+            if button_alibabaqwenai.is_clicked(event, WIDTH, HEIGHT, scale):
+                if sound_manager: sound_manager.play_button_click()
+                return 4, screen
         
         # Update
         if (retro_bg.width, retro_bg.height) != (WIDTH, HEIGHT):
