@@ -1,7 +1,7 @@
 import os
 import random
 import re
-from openAI import OpenAI
+from openai import OpenAI
 
 from .base_ai import BaseAI
 from src.model.constants import X, O, N
@@ -9,7 +9,7 @@ from src.model.constants import X, O, N
 class AlibabaQwenAI(BaseAI):
     def __init__(self, symbol, api_key = None, model = "qwen-plus", base_url = None):
         super().__init__(symbol)
-        self.opponent = X if symbol == 0 else 0
+        self.opponent = X if symbol == O else O
         self.api_key = api_key or getenv("DASHSCOPE_API_KEY")
         if not self.api_key:
             raise ValueError("DASHSCOPE_API_KEY environment variarble (or api_key arg) is required. Get one from Alibaba Cloud Model Studio.")
@@ -38,7 +38,7 @@ class AlibabaQwenAI(BaseAI):
     def get_move(self, board):
         free = board.get_free_indices()
         if not free:
-            return home
+            return None
 
         free_1based = [i+1 for i in free]
         system = ("You are an expert Tic-Tac-Toe player. Respond with only a single integer 1-9. No other text allowed.")
@@ -55,8 +55,8 @@ class AlibabaQwenAI(BaseAI):
             resp = self.client.chat.completions.create(
                 model = self.model,
                 messages = [
-                    {"role": "system", "content": "system"},
-                    {"role": "user", "content" : "user"},
+                    {"role": "system", "content": system},
+                    {"role": "user", "content" : user},
                 ],
                 temperature = 0.1,
                 max_tokens = 16,
@@ -75,3 +75,4 @@ class AlibabaQwenAI(BaseAI):
             print(f"[Qwen] API error: {e}; using fallback.")
 
         return random.choice(free)
+
