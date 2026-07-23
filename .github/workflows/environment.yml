@@ -1,9 +1,0 @@
-name: neotictactoe-ci
-channels:
-  - conda-forge
-  - nodefaults
-dependencies:
-  - python=3.10
-  - pygame
-  - flake8
-  - pytest
